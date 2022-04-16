@@ -1,12 +1,10 @@
-import Lab2.*
-import Lab2.ShapeCollector.*
-
+import lab2.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.assertThrows
 import kotlin.math.PI
 
-val Circle1: Circle = Circle(5.0, Black,White )
+val Circle1: Circle = Circle(5.0, Black, White)
 val Circle2: Circle = Circle(10.0, Black, Yellow)
 val Square1 = Square(5.0, Green, Yellow)
 val Square2: Square = Square(10.0, Orange, Blue)
@@ -29,9 +27,8 @@ internal class ShapeCollectorTest {
     @Test
     fun testSmallestShape() {
         val collector = ShapeCollector()
-        assertThrows<IllegalArgumentException> {
-            collector.smallestShape()
-        }
+        assertEquals(collector.smallestShape(), null)
+
         collector.addShape(Circle1)
         collector.addShape(Square1)
         collector.addShape(Rectangle1)
@@ -43,9 +40,8 @@ internal class ShapeCollectorTest {
     @Test
     fun testLargestShape() {
         val collector = ShapeCollector()
-        assertThrows<IllegalArgumentException> {
-            collector.largestShape()
-        }
+        assertEquals(collector.largestShape(), null)
+
         collector.addShape(Circle2)
         collector.addShape(Square2)
         collector.addShape(Rectangle2)
@@ -65,37 +61,33 @@ internal class ShapeCollectorTest {
         collector.addShape(Rectangle2)
         collector.addShape(Triangle2)
 
-        assertEquals(collector.sumArea(), 5*5* PI+5*5+10*5+0.5*6*8)
+        assertEquals(collector.sumArea(), 5 * 5 * PI + 5 * 5 + 10 * 5 + 0.5 * 6 * 8)
     }
 
     @Test
     fun testShapeBorderColor() {
         val collector = ShapeCollector()
-        assertThrows<IllegalArgumentException> {
-            collector.shapeBorderColor(Black)
-        }
+        assertEquals(collector.shapeBorderColor(Black), emptyList<ColoredShape2d>())
 
         collector.addShape(Circle1)
         collector.addShape(Square1)
         collector.addShape(Rectangle1)
         collector.addShape(Triangle1)
 
-        assertEquals(collector.shapeBorderColor(Black), collector.listShape.filter { it.borderColor == Black} )
+        assertEquals(collector.shapeBorderColor(Black), collector.listShape.filter { it.borderColor == Black })
     }
 
     @Test
     fun testShapeFillColor() {
         val collector = ShapeCollector()
-        assertThrows<IllegalArgumentException> {
-            collector.shapeFillColor(White)
-        }
+        assertEquals(collector.shapeFillColor(White), emptyList<ColoredShape2d>())
 
         collector.addShape(Circle2)
         collector.addShape(Square2)
         collector.addShape(Rectangle2)
         collector.addShape(Triangle2)
 
-        assertEquals(collector.shapeFillColor(White), collector.listShape.filter { it.fillColor == White} )
+        assertEquals(collector.shapeFillColor(White), collector.listShape.filter { it.fillColor == White })
     }
 
     @Test
@@ -114,14 +106,14 @@ internal class ShapeCollectorTest {
     @Test
     fun testNumberShapes() {
         val collector = ShapeCollector()
-        assertEquals(collector.numberShapes(), 0 )
+        assertEquals(collector.numberShapes(), 0)
 
         collector.addShape(Circle1)
         collector.addShape(Square1)
         collector.addShape(Rectangle1)
         collector.addShape(Triangle1)
 
-        assertEquals(collector.numberShapes(), 4 )
+        assertEquals(collector.numberShapes(), 4)
     }
 
     @Test
@@ -136,7 +128,7 @@ internal class ShapeCollectorTest {
         collector.addShape(Rectangle2)
         collector.addShape(Triangle2)
 
-        assertEquals(collector.getShapesGroupedByBorderColor(), collector.listShape.groupBy{it.borderColor})
+        assertEquals(collector.getShapesGroupedByBorderColor(), collector.listShape.groupBy { it.borderColor })
     }
 
     @Test
@@ -151,15 +143,13 @@ internal class ShapeCollectorTest {
         collector.addShape(Rectangle2)
         collector.addShape(Triangle2)
 
-        assertEquals(collector.getShapesGroupedByFillColor(), collector.listShape.groupBy{it.fillColor})
+        assertEquals(collector.getShapesGroupedByFillColor(), collector.listShape.groupBy { it.fillColor })
     }
 
     @Test
     fun testShapesByType() {
         val collector = ShapeCollector()
-        assertThrows<IllegalArgumentException> {
-            collector.shapesByType<Square>()
-        }
+        assertEquals(collector.shapesByType<Square>(), emptyList<ColoredShape2d>())
 
         collector.addShape(Circle1)
         collector.addShape(Square1)

@@ -1,33 +1,37 @@
-package Lab2
+package lab2
 
 class ShapeCollector {
     val listShape: MutableList<ColoredShape2d> = mutableListOf()
 
-    fun addShape (Shape: ColoredShape2d) { listShape.add(Shape)}
+    fun addShape(Shape: ColoredShape2d) {
+        listShape.add(Shape)
+    }
 
-    fun smallestShape() : Shape2d {
-        if (listShape.isEmpty()) throw IllegalArgumentException("Collector shapes is empty!")
-        else {
+    fun smallestShape(): Shape2d? {
+        return if (listShape.isEmpty()) {
+            null
+        } else {
             var smallestShape = listShape[0]
-            for(temp in listShape) {
+            for (temp in listShape) {
                 if (temp.calcArea() < smallestShape.calcArea()) {
                     smallestShape = temp
                 }
             }
-            return smallestShape
+            smallestShape
         }
     }
 
-    fun largestShape() : Shape2d {
-        if (listShape.isEmpty()) throw IllegalArgumentException("Collector shapes is empty!")
-        else {
+    fun largestShape(): Shape2d? {
+        return if (listShape.isEmpty()) {
+            null
+        } else {
             var largestShape = listShape[0]
-            for(temp in listShape) {
+            for (temp in listShape) {
                 if (temp.calcArea() > largestShape.calcArea()) {
                     largestShape = temp
                 }
             }
-            return largestShape
+            largestShape
         }
     }
 
@@ -35,7 +39,7 @@ class ShapeCollector {
         if (listShape.isEmpty()) throw IllegalArgumentException("Collector shapes is empty!")
         else {
             var sumArea = 0.0
-            for(temp in listShape) {
+            for (temp in listShape) {
                 sumArea += temp.calcArea()
             }
             return sumArea
@@ -43,27 +47,25 @@ class ShapeCollector {
     }
 
     fun shapeBorderColor(Color: Color): List<ColoredShape2d> {
-        if (listShape.isEmpty()) throw IllegalArgumentException("Collector shapes is empty!")
-        else {
-            val searchList: MutableList<ColoredShape2d> = mutableListOf()
+        val searchList: MutableList<ColoredShape2d> = mutableListOf()
+        if (listShape.isNotEmpty()) {
             for (temp in listShape) {
                 if (temp.borderColor == Color)
                     searchList.add(temp)
             }
-            return searchList
         }
+        return searchList
     }
 
     fun shapeFillColor(Color: Color): List<ColoredShape2d> {
-        if (listShape.isEmpty()) throw IllegalArgumentException("Collector shapes is empty!")
-        else {
-            val searchList: MutableList<ColoredShape2d> = mutableListOf()
+        val searchList: MutableList<ColoredShape2d> = mutableListOf()
+        if (listShape.isNotEmpty()) {
             for (temp in listShape) {
                 if (temp.fillColor == Color)
                     searchList.add(temp)
             }
-            return searchList
         }
+        return searchList
     }
 
     fun allStoredShapes(): List<ColoredShape2d> {
@@ -74,7 +76,7 @@ class ShapeCollector {
         return listShape.size
     }
 
-    fun getShapesGroupedByBorderColor(): Map<Color,List<ColoredShape2d>> {
+    fun getShapesGroupedByBorderColor(): Map<Color, List<ColoredShape2d>> {
         if (listShape.isEmpty()) throw IllegalArgumentException("Collector shapes is empty!")
         else {
             val map = mutableMapOf<Color, List<ColoredShape2d>>()
@@ -85,7 +87,7 @@ class ShapeCollector {
         }
     }
 
-    fun getShapesGroupedByFillColor(): Map<Color,List<ColoredShape2d>> {
+    fun getShapesGroupedByFillColor(): Map<Color, List<ColoredShape2d>> {
         if (listShape.isEmpty()) throw IllegalArgumentException("Collector shapes is empty!")
         else {
             val map = mutableMapOf<Color, List<ColoredShape2d>>()
@@ -96,17 +98,14 @@ class ShapeCollector {
         }
     }
 
-    inline fun<reified T> shapesByType() : List<ColoredShape2d> {
-        if (listShape.isEmpty()) throw IllegalArgumentException("Collector shapes is empty!")
-        else {
-            val newList = mutableListOf<ColoredShape2d>()
+    inline fun <reified T> shapesByType(): List<ColoredShape2d> {
+        val newList = mutableListOf<ColoredShape2d>()
+        if (listShape.isNotEmpty()) {
             for (Shape in listShape) {
-                if (Shape is T) {
+                if (Shape is T)
                     newList.add(Shape)
-                }
             }
-            return newList
         }
+        return newList
     }
-
 }

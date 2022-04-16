@@ -1,5 +1,4 @@
-package Lab2
-import Lab2.*
+package lab2
 
 fun main() {
 
@@ -19,9 +18,9 @@ fun main() {
 
     println("\nTotal area of all shape in collection: ${shapeCollector.sumArea()}")
 
-    println("\nSmallest shape (area ${shapeCollector.smallestShape().calcArea()}):\n${shapeCollector.smallestShape()}")
+    println("\nSmallest shape (area ${shapeCollector.smallestShape()!!.calcArea()}):\n${shapeCollector.smallestShape()}")
 
-    println("\nLargest shape (area ${shapeCollector.largestShape().calcArea()}):\n${shapeCollector.largestShape()}")
+    println("\nLargest shape (area ${shapeCollector.largestShape()!!.calcArea()}):\n${shapeCollector.largestShape()}")
 
     println("\nAll shapes have border color BLUE:")
     for(temp in shapeCollector.shapeBorderColor(Blue)) println("$temp")

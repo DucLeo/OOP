@@ -1,5 +1,4 @@
-package Lab1
-import Lab1.*
+package lab1
 
 fun main() {
     val textListAddresses = """
@@ -20,9 +19,9 @@ fun main() {
     listAddresses = parseListAddresses(textListAddresses)
 
     println("List of addresses:")
-    for( i in 1..listAddresses.size){
+    for (i in 1..listAddresses.size) {
         print("$i. ")
-        println(listAddresses[i-1])
+        println(listAddresses[i - 1])
     }
 
     println("\nAddress with the smallest index: ${smallestIndex(listAddresses)}")

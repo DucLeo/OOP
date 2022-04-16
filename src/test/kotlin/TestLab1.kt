@@ -1,18 +1,14 @@
-import Lab1.*
-import Lab1.Address.*
-
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.assertDoesNotThrow
+import lab1.*
 
-internal class AddressKtTest{
+internal class AddressKtTest {
     @Test
     fun test_parseListAddresses() {
         var address = ""
-        assertThrows<IllegalArgumentException> {
-            parseListAddresses(address)
-        }
+
+        assertEquals(parseListAddresses(address), emptyList<Address>())
 
         address = """
         1. 091005, Санкт-Петербург, ул. Балтийская, д. 10
@@ -21,23 +17,22 @@ internal class AddressKtTest{
 
         val listAddresses = parseListAddresses(address)
 
-        assertEquals(listAddresses[0].Index, "091005")
-        assertEquals(listAddresses[1].Index, "100820")
-        assertEquals(listAddresses[0].City, "Санкт-Петербург")
-        assertEquals(listAddresses[1].City, "Москва")
-        assertEquals(listAddresses[0].Street, "Балтийская")
-        assertEquals(listAddresses[1].Street, "Арбата")
-        assertEquals(listAddresses[0].House, 10)
-        assertEquals(listAddresses[1].House, 8)
+        assertEquals(listAddresses[0].index, "091005")
+        assertEquals(listAddresses[1].index, "100820")
+        assertEquals(listAddresses[0].city, "Санкт-Петербург")
+        assertEquals(listAddresses[1].city, "Москва")
+        assertEquals(listAddresses[0].street, "Балтийская")
+        assertEquals(listAddresses[1].street, "Арбата")
+        assertEquals(listAddresses[0].house, 10)
+        assertEquals(listAddresses[1].house, 8)
 
     }
 
     @Test
     fun test_smallestIndex() {
         var listAddresses: List<Address> = emptyList()
-        assertThrows<IllegalArgumentException> {
-            smallestIndex(listAddresses)
-        }
+
+        assertEquals(smallestIndex(listAddresses), null)
 
         listAddresses = listOf(
             Address("091005", "Санкт-Петербург", "Балтийская", 10),
@@ -47,15 +42,14 @@ internal class AddressKtTest{
         assertDoesNotThrow {
             smallestIndex(listAddresses)
         }
-        assertEquals(address, listAddresses.minByOrNull { it.Index.toInt() })
+        assertEquals(address, listAddresses.minByOrNull { it.index.toInt() })
     }
 
     @Test
     fun test_biggestIndex() {
         var listAddresses: List<Address> = emptyList()
-        assertThrows<IllegalArgumentException> {
-            biggestIndex(listAddresses)
-        }
+
+        assertEquals(biggestIndex(listAddresses), null)
 
         listAddresses = listOf(
             Address("091005", "Санкт-Петербург", "Балтийская", 10),
@@ -65,15 +59,14 @@ internal class AddressKtTest{
         assertDoesNotThrow {
             biggestIndex(listAddresses)
         }
-        assertEquals(address, listAddresses.maxByOrNull { it.Index.toInt() })
+        assertEquals(address, listAddresses.maxByOrNull { it.index.toInt() })
     }
 
     @Test
     fun test_shortestNameStreet() {
         var listAddresses: List<Address> = emptyList()
-        assertThrows<IllegalArgumentException> {
-            shortestNameStreet(listAddresses)
-        }
+
+        assertEquals(shortestNameStreet(listAddresses), null)
 
         listAddresses = listOf(
             Address("091005", "Санкт-Петербург", "Балтийская", 10),
@@ -83,15 +76,14 @@ internal class AddressKtTest{
         assertDoesNotThrow {
             shortestNameStreet(listAddresses)
         }
-        assertEquals(address, listAddresses.minByOrNull { it.Street.length })
+        assertEquals(address, listAddresses.minByOrNull { it.street.length })
     }
 
     @Test
     fun test_longestNameStreet() {
         var listAddresses: List<Address> = emptyList()
-        assertThrows<IllegalArgumentException> {
-            longestNameStreet(listAddresses)
-        }
+
+        assertEquals(longestNameStreet(listAddresses), null)
 
         listAddresses = listOf(
             Address("091005", "Санкт-Петербург", "Балтийская", 10),
@@ -101,6 +93,6 @@ internal class AddressKtTest{
         assertDoesNotThrow {
             longestNameStreet(listAddresses)
         }
-        assertEquals(address, listAddresses.maxByOrNull { it.Street.length })
+        assertEquals(address, listAddresses.maxByOrNull { it.street.length })
     }
 }

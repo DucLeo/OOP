@@ -1,56 +1,83 @@
-package Lab2
+package lab2
 
 import kotlin.math.PI
 import kotlin.math.sqrt
 
-class Circle (R: Double,
-              override val borderColor: Color,
-              override val fillColor: Color) : ColoredShape2d {
-    private val r: Double
+data class Circle(
+    val r: Double,
+    override val borderColor: Color,
+    override val fillColor: Color
+) : ColoredShape2d {
     init {
-        r = if (R <= 0) error("Radius of circle must be a positive") else R
+        if (r <= 0) error("Radius of circle must be a positive")
     }
-    override fun calcArea(): Double { return PI*r*r }
-    override fun toString(): String { return "Circle($r, $borderColor, $fillColor)" }
+
+    override fun calcArea(): Double {
+        return PI * r * r
+    }
+
+    override fun toString(): String {
+        return "Circle($r, $borderColor, $fillColor)"
+    }
 }
 
-class Square (A: Double,
-              override val borderColor: Color,
-              override val fillColor: Color) : ColoredShape2d {
-    private val a: Double
+data class Square(
+    val a: Double,
+    override val borderColor: Color,
+    override val fillColor: Color
+) : ColoredShape2d {
     init {
-        a = if (A <= 0) error("Side of square must be a positive") else A
+        if (a <= 0) error("Side of square must be a positive")
     }
-    override fun calcArea(): Double { return a*a }
-    override fun toString(): String { return "Square($a, $borderColor, $fillColor)" }
+
+    override fun calcArea(): Double {
+        return a * a
+    }
+
+    override fun toString(): String {
+        return "Square($a, $borderColor, $fillColor)"
+    }
 }
 
-class Rectangle (A: Double, B: Double,
-                 override val borderColor: Color,
-                 override val fillColor: Color) : ColoredShape2d {
-    private val a: Double
-    private val b: Double
+data class Rectangle(
+    val a: Double, val b: Double,
+    override val borderColor: Color,
+    override val fillColor: Color
+) : ColoredShape2d {
+
     init {
-        a = if (A <= 0) error("Side of rectangle must be a positive") else A
-        b = if (B <= 0) error("Side of rectangle must be a positive") else B
+        if (a <= 0) error("Side of rectangle must be a positive")
+        if (b <= 0) error("Side of rectangle must be a positive")
         if (a == b) error("Two sides of the rectangle must be different")
     }
-    override fun calcArea(): Double { return a*b }
-    override fun toString(): String { return "Rectangle ($a, $b, $borderColor, $fillColor)" }
+
+    override fun calcArea(): Double {
+        return a * b
+    }
+
+    override fun toString(): String {
+        return "Rectangle ($a, $b, $borderColor, $fillColor)"
+    }
 }
 
-class Triangle (A: Double, B: Double, C: Double,
-                override val borderColor: Color,
-                override val fillColor: Color) : ColoredShape2d {
-    private val a: Double
-    private val b: Double
-    private val c: Double
+data class Triangle(
+    val a: Double, val b: Double, val c: Double,
+    override val borderColor: Color,
+    override val fillColor: Color
+) : ColoredShape2d {
+
     init {
-        a = if (A <= 0) error("Side of triangle must be a positive") else A
-        b = if (B <= 0) error("Side of triangle must be a positive") else B
-        c = if (C <= 0) error("Side of triangle must be a positive") else C
+        if (a <= 0) error("Side of triangle must be a positive") else a
+        if (b <= 0) error("Side of triangle must be a positive") else b
+        if (c <= 0) error("Side of triangle must be a positive") else c
         if (a + b <= c || b + c <= a || a + c <= b) error("No triangle with these three sides")
     }
-    override fun calcArea(): Double { return 0.25* sqrt((a+b+c)*(a+b-c)*(a-b+c)*(b-a+c)) }
-    override fun toString(): String { return "Triangle ($a, $b, $c, $borderColor, $fillColor)" }
+
+    override fun calcArea(): Double {
+        return 0.25 * sqrt((a + b + c) * (a + b - c) * (a - b + c) * (b - a + c))
+    }
+
+    override fun toString(): String {
+        return "Triangle ($a, $b, $c, $borderColor, $fillColor)"
+    }
 }
