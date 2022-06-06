@@ -1,3 +1,3 @@
 
-rootProject.name = "OOP"
+rootProject.name = "OOP-CourseWork"
 
